@@ -2,7 +2,7 @@ Config = {}
 
 Config.Locale = "en"
 
-Config.Debug = false -- Dont make true on Live Server
+Config.Debug = true -- Dont make true on Live Server
 
 Config.NativeZones = true
 Config.Notification = {
