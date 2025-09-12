@@ -21,7 +21,7 @@ var staff_team = [
 
 // Staff Settings
 const showStaffTeam = true
-const showPlayersList = true
+const showPlayersList = false
 
 
 // orange
@@ -38,9 +38,9 @@ const enableWinterUpdate = false
 
 
 // Text settings
-const name = "<strong>VORP</strong>CORE"
-const underName = "ROLE<b>PLAY</b>"
-const desc = "RedM Roleplay server featuring an extensive collection of custom scripts, maps, vehicles, unique weapons, and much more."
+const name = "ATLEAST"
+const underName = "ROLEPLAY"
+const desc = ""
 
 
 // Social media

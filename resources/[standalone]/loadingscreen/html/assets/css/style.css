@@ -1,27 +1,75 @@
 
-@import 'https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap';
+@import 'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=UnifrakturMaguntia&family=Creepster&display=swap';
 *{margin:0;padding:0;border:0;outline:0;text-decoration:none;line-height:inherit;vertical-align:inherit;}h1,h2,h3,h4,h5,h6{font-weight:normal;}ul{list-style:none;}
-*{font-family: 'Mulish', sans-serif;}
+*{font-family: 'Cinzel', serif;}
 
 body {
   overflow: hidden;
   width: 100vw;
   height: 100vh;
+  background: linear-gradient(135deg, #8B4513 0%, #D2691E 25%, #CD853F 50%, #F4A460 75%, #DEB887 100%);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  position: relative;
 }
+
+/* Western Background Elements */
+.western-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+}
+
+.desert-landscape {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60%;
+  background: linear-gradient(to top, #8B4513 0%, #A0522D 30%, #CD853F 60%, #F4A460 100%);
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  transform: scale(1.1);
+}
+
+.mountains {
+  position: absolute;
+  bottom: 40%;
+  left: 0;
+  width: 100%;
+  height: 40%;
+  background: linear-gradient(45deg, #2F4F4F 0%, #696969 50%, #A9A9A9 100%);
+  clip-path: polygon(0% 100%, 20% 60%, 40% 80%, 60% 40%, 80% 70%, 100% 50%, 100% 100%);
+  opacity: 0.8;
+}
+
+.sunset-sky {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, #FF6B35 0%, #F7931E 20%, #FFD23F 40%, #FF6B35 60%, #8B0000 100%);
+  opacity: 0.7;
+}
+
 
 .center {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  z-index: 5;
+  text-align: center;
+  max-width: 70vw;
+  padding: 2vw;
 }
 
 img.logo {
@@ -33,7 +81,9 @@ img.logo {
   justify-content: center;
   align-items: center;
   gap: 1vw;
-  margin-top: 1.5vw;
+  margin-top: 2vw;
+  position: relative;
+  z-index: 10;
 }
 
 .social li a {
@@ -68,114 +118,239 @@ img.logo {
 
 }
 
-.center h1 strong {
-  font-weight: 900;
-  text-shadow: 0px 0px 2vw rgba(var(--main), 0.5);
-  color: rgba(var(--main), 1);
-  /*font-family: 'snow', sans-serif;*/
-  /*font-weight: 100;*/
-}
-
-.center h1 {
-  letter-spacing: 0.25vw;
-  font-size: 5vw;
-  font-weight: 900;
-  font-style: italic;
-  color: #fff;
-  text-shadow: 0px 0px 2vw #ffffff50;
-  /*font-family: 'snow', sans-serif;*/
-  /*font-weight: 100;*/
-}
-
-.center p {
-  color: #fff;
-  font-weight: 800;
-  font-size: 2vw;
-  /*text-transform: uppercase;*/
-  font-style: italic;
-  letter-spacing: 0.2vw;
-  margin-top: -1vw;
-  text-shadow: 0px 0px 2vw #ffffff50;
-}
-
-.center p b {
-  font-weight: 900;
-  text-shadow: 0px 0px 2vw rgba(var(--main), 0.5);
-  color: rgba(var(--main), 1);
-}
-
-.center span {
-  width: 28vw;
-  color: #fff;
+/* Red Dead Redemption Typography */
+.title-container {
   text-align: center;
-  margin-top: 0.5vw;
-  font-size: 0.75vw;
-  color: #dbdbdb;
+  margin-bottom: 3vw;
+  position: relative;
+  z-index: 10;
 }
 
+.main-title {
+  font-family: 'Cinzel', serif;
+  font-size: 5.5vw;
+  font-weight: 900;
+  color: #8B0000;
+  text-shadow: 3px 3px 0px #000, 6px 6px 0px rgba(0,0,0,0.3);
+  letter-spacing: 0.3vw;
+  margin: 0;
+  text-transform: uppercase;
+  animation: titleGlow 2s ease-in-out infinite alternate;
+  line-height: 0.9;
+}
+
+.sub-title {
+  font-family: 'Cinzel', serif;
+  font-size: 4vw;
+  font-weight: 700;
+  color: #DAA520;
+  text-shadow: 2px 2px 0px #000, 4px 4px 0px rgba(0,0,0,0.3);
+  letter-spacing: 0.2vw;
+  margin: 0;
+  text-transform: uppercase;
+  animation: titleGlow 2s ease-in-out infinite alternate-reverse;
+  line-height: 0.9;
+}
+
+.title-divider {
+  width: 8vw;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, #DAA520, transparent);
+  margin: 1vw auto;
+  border-radius: 2px;
+  animation: dividerPulse 3s ease-in-out infinite;
+}
+
+.tagline {
+  color: #F4A460;
+  font-weight: 600;
+  font-size: 1.5vw;
+  text-transform: uppercase;
+  letter-spacing: 0.15vw;
+  margin: 2vw 0 0 0;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+  font-style: italic;
+  position: relative;
+  z-index: 10;
+}
+
+.tagline b {
+  color: #DAA520;
+  font-weight: 900;
+  text-shadow: 1px 1px 2px #000;
+}
+
+.description {
+  width: 45vw;
+  color: #F5DEB3;
+  text-align: center;
+  margin: 2vw auto 0;
+  font-size: 0.85vw;
+  line-height: 1.5;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+  font-weight: 400;
+  position: relative;
+  z-index: 10;
+  max-width: 600px;
+}
+
+@keyframes titleGlow {
+  0% { text-shadow: 3px 3px 0px #000, 6px 6px 0px rgba(0,0,0,0.3), 0 0 20px rgba(218, 165, 32, 0.5); }
+  100% { text-shadow: 3px 3px 0px #000, 6px 6px 0px rgba(0,0,0,0.3), 0 0 30px rgba(218, 165, 32, 0.8); }
+}
+
+@keyframes dividerPulse {
+  0%, 100% { opacity: 0.6; transform: scaleX(1); }
+  50% { opacity: 1; transform: scaleX(1.1); }
+}
+
+/* Red Dead Redemption Loading Bar */
 .loading-bar {
   position: fixed;
-  bottom: 0vw;
+  bottom: 8vw;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, 0);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  z-index: 15;
+  width: 100%;
+  max-width: 45vw;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 2vw 3vw;
+  border-radius: 12px;
+  backdrop-filter: blur(8px);
+  border: 2px solid rgba(218, 165, 32, 0.3);
 }
 
-.loading-bar p {
-  font-size: 1vw;
-  color: #fff;
-  margin-bottom: 0.6vw;
+.loading-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1vw;
+}
 
-  font-size: 0.75vw;
-  color: #dbdbdb;
+.loading-percentage {
+  font-size: 2.2vw;
+  color: #DAA520;
+  font-weight: 900;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+  margin: 0;
+  font-family: 'Cinzel', serif;
+  position: relative;
+  z-index: 15;
+}
+
+.loading-status {
+  font-size: 0.9vw;
+  color: #F4A460;
+  margin: 0.8vw 0 0 0;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+  font-style: italic;
+  position: relative;
+  z-index: 15;
 }
 
 .loading-bar .bar {
-  margin-bottom: 0.4vw;
-  width: 30vw;
-  height: 0.3vw;
+  margin: 1vw 0 0 0;
+  width: 35vw;
+  height: 1vw;
   border-radius: 100vw;
-  background-color: #353535a6;
+  background: linear-gradient(90deg, #2F4F4F 0%, #696969 50%, #2F4F4F 100%);
+  border: 2px solid #8B0000;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.5), 0 0 10px rgba(139, 0, 0, 0.3);
+  position: relative;
 }
 
 .loading-bar .bar .line {
   height: 100%;
   width: 0%;
   border-radius: 100vw;
-  background-color: rgba(var(--main), 1);
-  box-shadow: 0px 0px 2vw rgba(var(--main), 0.631);
-  transition: 1s;
+  background: linear-gradient(90deg, #8B0000 0%, #DAA520 50%, #8B0000 100%);
+  box-shadow: 0 0 15px rgba(218, 165, 32, 0.8), inset 0 1px 2px rgba(255,255,255,0.3);
+  transition: 1s ease-out;
+  position: relative;
 }
+
+.loading-bar .bar .line::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%);
+  border-radius: 100vw;
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Loading Tips Panel */
+.loading-tips {
+  position: fixed;
+  top: 20%;
+  right: 3vw;
+  z-index: 10;
+  max-width: 25vw;
+}
+
+.tip-container {
+  background: linear-gradient(135deg, rgba(139, 0, 0, 0.85) 0%, rgba(47, 79, 79, 0.85) 100%);
+  border: 2px solid #DAA520;
+  border-radius: 10px;
+  padding: 1.5vw;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+  animation: tipFade 4s ease-in-out infinite;
+  backdrop-filter: blur(5px);
+}
+
+.loading-tip {
+  color: #F5DEB3;
+  font-size: 0.9vw;
+  line-height: 1.4;
+  text-align: center;
+  font-style: italic;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+  margin: 0;
+}
+
+@keyframes tipFade {
+  0%, 100% { opacity: 0.8; transform: translateY(0px); }
+  50% { opacity: 1; transform: translateY(-3px); }
+}
+
 
 .panel {
   position: fixed;
-  width: 20vw;
-  border-radius: 0.2vw;
+  width: 18vw;
+  border-radius: 8px;
   transition: 0.3s;
   color: #fff;
+  background: linear-gradient(135deg, rgba(139, 0, 0, 0.85) 0%, rgba(47, 79, 79, 0.85) 100%);
+  border: 2px solid #DAA520;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.6);
 }
 
 .panel h3 {
-  font-size: 1vw;
+  font-size: 0.9vw;
+  color: #DAA520;
+  text-align: center;
+  margin-bottom: 0.5vw;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
 }
 
 .panel.left {
   position: fixed;
-  top: 50%;
-  left: 0%;
-  margin: 0px 3vw;
-  transform: translate(0%, -50%);
-}
-
-.panel.right {
-  position: fixed;
-  top: 50%;
-  right: 0%;
-  margin: 0px 3vw;
-  transform: translate(0%, -50%);
+  top: 20%;
+  left: 3vw;
+  transform: translate(0%, 0%);
+  padding: 1vw;
 }
 
 .pfp {
@@ -187,40 +362,54 @@ img.logo {
 .list {
   display: flex;
   flex-direction: column;
-  gap: 0.3vw;
-  margin-top: 0.4vw;
-  height: 25vw;
+  gap: 0.5vw;
+  margin-top: 0.5vw;
+  height: 20vw;
   overflow: auto;
 }
 
 ::-webkit-scrollbar {
-  width: 0px;
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0.2);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #DAA520;
+  border-radius: 2px;
 }
 
 .staff .info {
   display: flex;
   align-items: center;
   gap: 0.5vw;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .staff {
-  background-color: #ffffff0d;
-  padding: 0.2vw 0.3vw;
-  border-radius: 0.1vw;
+  background: rgba(0,0,0,0.3);
+  padding: 0.5vw;
+  border-radius: 4px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 0.7vw;
-  text-shadow: 0px 0px 0.5vw #000;
-  box-shadow: 0.05vw 0px #ff960000 inset, 0px 0px 0px 0.05vw #ffffff10 inset;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+  border: 1px solid rgba(218, 165, 32, 0.3);
   transition: 0.2s;
-  background-color: rgba(var(--main), 0.08);
+}
+
+.staff:hover {
+  background: rgba(0,0,0,0.5);
+  border-color: #DAA520;
 }
 
 .staff .status {
   transition: 0.2s;
-  color: rgba(var(--main), 1);
+  color: #DAA520;
   font-weight: 700;
 }
 

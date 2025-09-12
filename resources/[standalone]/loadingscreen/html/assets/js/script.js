@@ -1,10 +1,55 @@
 
-$(".center h1").html(name)
-$(".center p").html(underName)
-$(".center span").html(desc)
+$(".main-title").html(name)
+$(".sub-title").html(underName)
+$(".description").html(desc)
 var serverInfo = null
+// Western-themed loading messages
+const loadingMessages = [
+	"Loading the frontier...",
+	"Preparing your horse...",
+	"Loading the saloon...",
+	"Setting up the sheriff's office...",
+	"Loading the general store...",
+	"Preparing the wilderness...",
+	"Loading the railroad...",
+	"Setting up the camp...",
+	"Preparing the showdown...",
+	"Loading the gold rush...",
+	"Setting up the outlaws...",
+	"Preparing the lawmen...",
+	"Loading the frontier towns...",
+	"Setting up the stagecoach...",
+	"Preparing the showdown at high noon..."
+];
+
+// Western-themed loading tips
+const loadingTips = [
+	"The frontier is a dangerous place, partner. Trust your instincts.",
+	"Keep your gun close and your horse closer.",
+	"Honor among thieves is rare, but it exists.",
+	"The law is coming, but justice takes time.",
+	"Gold fever can make a man do terrible things.",
+	"A good horse is worth more than gold in these parts.",
+	"The desert sun shows no mercy to the unprepared.",
+	"Every man has a price, but not every man is for sale.",
+	"The railroad brought civilization, but also corruption.",
+	"Out here, a man's word is his bond.",
+	"The mountains hold many secrets and much gold.",
+	"Trust is earned, not given freely on the frontier.",
+	"The saloon is where deals are made and broken.",
+	"Justice comes swift and sure in the West.",
+	"Every town needs a sheriff, but not every sheriff needs a town."
+];
+
+// Rotate loading tips
+let currentTipIndex = 0;
+setInterval(function() {
+	currentTipIndex = (currentTipIndex + 1) % loadingTips.length;
+	$(".loading-tip").text('"' + loadingTips[currentTipIndex] + '"');
+}, 5000);
+
 function loading(num) {
-	let current = parseInt($(".loading-bar p").text(), 10) || 0;
+	let current = parseInt($(".loading-percentage").text(), 10) || 0;
 	const step = 1;
 	const delay = 700 / Math.abs(num - current);
 
@@ -18,7 +63,11 @@ function loading(num) {
 		} else {
 			clearInterval(interval);
 		}
-		$(".loading-bar p").text(current + "%");
+		$(".loading-percentage").text(current + "%");
+		
+		// Update loading message based on progress
+		const messageIndex = Math.floor((current / 100) * loadingMessages.length);
+		$(".loading-status").text(loadingMessages[messageIndex] || loadingMessages[loadingMessages.length - 1]);
 	}, delay);
 
 	$(".loading-bar .line").width(num + "%");
@@ -39,31 +88,6 @@ if (showStaffTeam) {
 	})
 }
 
-if (showPlayersList) {
-	$(".panel.playerlist").show()
-	players()
-}
-
-function players() {
-	if (serverCode == "******") { return }
-	$.get("https://servers-frontend.fivem.net/api/servers/single/" + serverCode, function (data) {
-		serverInfo = data.Data
-		serverInfo.players.forEach(function (player) {
-
-
-
-			$(".player_list").append(`
-				<div class="staff">
-					<div class="info">
-						<img src="${playerProfileImage}" class="pfp">
-						<p>${player.name}</p>
-					</div>
-					<p class="status">${player.id}</p>
-				</div>
-			`)
-		})
-	})
-}
 
 window.addEventListener('message', function (e) {
 	if (e.data.eventName === 'loadProgress') {
@@ -117,12 +141,42 @@ if (theme == "purple") {
 	$("body").css("background-image", "url('assets/img/purple.jpg')")
 	$(".winter").css("background", "linear-gradient(0deg, rgb(193 67 255 / 10%) 0%, rgba(193, 67, 255, 0.0) 100%)")
 }
+// Western Dust Particles
+particlesJS("particles-js", {
+	"particles": {
+		"number": { "value": 200, "density": { "enable": true, "value_area": 1000 } },
+		"color": { "value": ["#8B4513", "#D2691E", "#CD853F", "#F4A460", "#DEB887"] },
+		"shape": { "type": "circle" },
+		"opacity": { "value": 0.3, "random": true, "anim": { "enable": true, "speed": 1, "opacity_min": 0.1, "sync": false } },
+		"size": { "value": 2, "random": true, "anim": { "enable": true, "speed": 2, "size_min": 0.5, "sync": false } },
+		"line_linked": { "enable": false },
+		"move": { 
+			"enable": true, 
+			"speed": 1, 
+			"direction": "bottom-right", 
+			"random": true, 
+			"straight": false, 
+			"out_mode": "out", 
+			"bounce": false 
+		}
+	},
+	"interactivity": { 
+		"detect_on": "canvas", 
+		"events": { 
+			"onhover": { "enable": false }, 
+			"onclick": { "enable": false }, 
+			"resize": true 
+		}
+	},
+	"retina_detect": true
+});
+
+$("#particles-js").css("opacity", 1);
+
 // Winter update
 if (enableWinterUpdate) {
-	particlesJS("particles-js", { "particles": { "number": { "value": 160, "density": { "enable": true, "value_area": 800 } }, "color": { "value": "#ffffff" }, "shape": { "type": "circle", "stroke": { "width": 0, "color": "#000000" }, "polygon": { "nb_sides": 5 }, "image": { "src": "img/github.svg", "width": 100, "height": 100 } }, "opacity": { "value": 0.5, "random": false, "anim": { "enable": false, "speed": 1, "opacity_min": 0.1, "sync": false } }, "size": { "value": 3, "random": true, "anim": { "enable": false, "speed": 40, "size_min": 0.1, "sync": false } }, "line_linked": { "enable": false, "distance": 150, "color": "#ffffff", "opacity": 0.4, "width": 1 }, "move": { "enable": true, "speed": 1.5, "direction": "bottom", "random": true, "straight": false, "out_mode": "out", "bounce": false, "attract": { "enable": true, "rotateX": 100, "rotateY": 1200 } } }, "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": false, "mode": "repulse" }, "onclick": { "enable": false, "mode": "repulse" }, "resize": true }, "modes": { "grab": { "distance": 400, "line_linked": { "opacity": 1 } }, "bubble": { "distance": 400, "size": 40, "duration": 2, "opacity": 8, "speed": 3 }, "repulse": { "distance": 223.7762237762238, "duration": 0.4 }, "push": { "particles_nb": 4 }, "remove": { "particles_nb": 2 } } }, "retina_detect": true });
 	$("body").css("background-image", "url('assets/img/winter.jpg')")
 	$(".winter").css("display", "flex")
-	$("#particles-js").css("opacity", 1)
 }
 
 let a, vl, yt, isMute = false, isPaused = false;
