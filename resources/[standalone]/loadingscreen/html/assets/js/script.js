@@ -2,7 +2,6 @@
 $(".main-title").html(name)
 $(".sub-title").html(underName)
 $(".description").html(desc)
-var serverInfo = null
 // Western-themed loading messages
 const loadingMessages = [
 	"Loading the frontier...",
@@ -70,7 +69,9 @@ function loading(num) {
 		$(".loading-status").text(loadingMessages[messageIndex] || loadingMessages[loadingMessages.length - 1]);
 	}, delay);
 
-	$(".loading-bar .line").width(num + "%");
+	// Ensure progress bar doesn't exceed 100%
+	const clampedNum = Math.min(Math.max(num, 0), 100);
+	$(".loading-bar .line").width(clampedNum + "%");
 }
 
 if (showStaffTeam) {
@@ -96,20 +97,6 @@ window.addEventListener('message', function (e) {
 	}
 });
 
-const socials = { discord, instagram, youtube, twitter, tiktok, facebook, twitch, github };
-const platforms = ["discord", "instagram", "youtube", "twitter", "tiktok", "facebook", "twitch", "github"];
-
-platforms.forEach(platform => {
-	if (socials[platform] != "") {
-		$(`.${platform}`).show();
-		$(`.${platform} a`).attr("href", socials[platform]);
-	}
-});
-
-$("a").on("click", function (e) {
-	e.preventDefault()
-	window.invokeNative('openUrl', e.target.href)
-})
 
 if (theme == "orange") {
 	$("body").append(`<style>:root{--main:255, 150, 0;}</style>`)
@@ -177,81 +164,4 @@ $("#particles-js").css("opacity", 1);
 if (enableWinterUpdate) {
 	$("body").css("background-image", "url('assets/img/winter.jpg')")
 	$(".winter").css("display", "flex")
-}
-
-let a, vl, yt, isMute = false, isPaused = false;
-
-if (youtubeVideo.startsWith("https://www.youtube.com")) {
-	if (!enableLocalVideo) {
-		let videoId = youtubeVideo.split('/').pop().split('=')[1];
-		if (!showYoutubeVideo) {
-			videoOpacity = 0
-
-		}
-		$("iframe").attr("src", `https://www.youtube.com/embed/${videoId}?autoplay=1&controls=0&enablejsapi=1&disablekb=1`)
-			.css({ filter: `blur(${videoBlur}px)`, opacity: videoOpacity });
-		if (showYoutubeVideo) $("body").css("background", "#000");
-		if (enableLocalVideo) {
-			$("iframe").attr("src", "")
-		}
-	}
-}
-if (localAudio) {
-	$('body').append('<audio id="audioPlayer" src="audio.mp3" loop></audio>');
-	$('#audioPlayer')[0].play();
-	a = $('#audioPlayer');
-}
-
-if (enableLocalVideo) {
-	$('body').append('<video id="videoPlayer" autoplay loop><source src="video.webm" type="video/webm"></video>');
-	$('#videoPlayer')[0].play();
-	vl = $('#videoPlayer');
-	if (localAudio) {
-		vl[0].muted = true
-	}
-	$("body").css("background", "#000");
-}
-
-function onYouTubeIframeAPIReady() {
-	yt = new YT.Player('youtube-video', {
-		events: { 'onReady': onPlayerReady }
-	});
-}
-
-function onPlayerReady() {
-	if (localAudio) { yt.mute(); }
-}
-
-function toggleMute(self) {
-	$(self).toggleClass("act");
-	isMute = !isMute;
-	if (yt && typeof yt.mute === "function") {
-		localAudio ? yt.mute() : (isMute ? yt.mute() : yt.unMute());
-	}
-	if (a && a[0]) { a[0].muted = isMute; }
-	if (vl && vl[0]) { if (localAudio) { vl[0].muted = true }; vl[0].muted = localAudio || isMute; }
-}
-
-function togglePause(self) {
-	$(self).toggleClass("act");
-	isPaused = !isPaused;
-	if (yt && typeof yt.pauseVideo === "function" && typeof yt.playVideo === "function") {
-		isPaused ? yt.pauseVideo() : yt.playVideo();
-	}
-	if (a && a[0]) { isPaused ? a[0].pause() : a[0].play(); }
-	if (vl && vl[0]) { isPaused ? vl[0].pause() : vl[0].play() }
-}
-
-
-function setVolume(volume) {
-	if (a && a[0]) { a[0].volume = volume / 100; }
-	if (vl && vl[0]) { vl[0].volume = volume / 100; }
-	if (yt && typeof yt.setVolume === "function" && yt.videoTitle !== "" && !localAudio) {
-		yt.setVolume(volume);
-	}
-
-	$(".inpt span").text(volume + "%");
-	$(".volume-slider").css({
-		background: `rgba(var(--main), ${(volume / 100) + 0.2})`
-	});
 }
