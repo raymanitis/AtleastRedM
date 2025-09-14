@@ -1,7 +1,0 @@
-#1 2024. 05. 08
-Update: Fixed issue with missing ",' in config
-Updated file: config.lua
-
-#2 2024. 05. 24
-Update: Fixed issue with using Antler item at second time in same gameplay
-Updated file: client.lua

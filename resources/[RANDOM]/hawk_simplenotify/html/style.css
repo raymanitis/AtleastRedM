@@ -1,0 +1,74 @@
+@font-face {
+	font-family: HapnaSlabSerif-Medium;
+	src: url(fonts/HapnaSlabSerif-Medium.ttf) format('truetype')
+}
+
+
+#notification-container {
+    position: fixed;
+    top: 50%;
+    right: 2%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5vw;
+    z-index: 9999;
+    align-items: flex-end; 
+}
+
+.notification {
+    padding: 1vh 1vw;
+    border-radius: 5px;
+    font-size: 0.85vw;
+    font-weight: bold;
+    font-family: "HapnaSlabSerif-Medium", HapnaSlabSerif-Medium, serif;
+    color: white;
+    opacity: 1;
+    /* min-width: 200px;
+    max-width: 300px; */
+    max-width: fit-content; 
+    min-width: auto;
+
+    display: inline-block; 
+    white-space: nowrap; 
+    overflow: hidden;
+    /* background-color: black; */
+    background-image: url(bg.png);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 99% 100%;
+}
+
+
+.notification.success {
+    color: #51ce6e; 
+}
+
+.notification.error {
+    color: #c72e3d;
+}
+
+.notification.info {
+    color: #f3f3f3;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fade-out {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+}

@@ -1,0 +1,48 @@
+1.3.5 - 11/09/2025
+
+Fixed issues with forges not saving to database correctly.
+Forges now spawn properly from Config.ForgeSpawns.
+Added EntityLOD to forges.
+
+1.3.4 - 16/07/2025
+
+Fixed premature session clearing during long crafts by storing expectedDuration in sessions and setting cleanup threshold to expectedDuration + 60 seconds, preventing "Invalid smelting session" errors.
+Changed session cleanup loop interval to 60 seconds for more timely stale session removal without interrupting active crafts.
+
+1.3.3 - 11/07/2025
+
+Removed Problematic Timeout Function (client.lua): Eliminated TriggerServerEventWithTimeout, which caused "Invalid smelting session" and "Network timeout" errors due to retry logic and session mismatches. Reverted to standard TriggerServerEvent for blacksmithing:smeltOre and blacksmithing:refundMaterials to improve reliability.
+Added Session Management (server.lua): Introduced activeSmeltingSessions table to track ongoing smelting, ensuring materials are refunded on player disconnect via a new playerDropped event handler. Added 120-second stale session cleanup to prevent memory leaks.
+Improved Session Validation (server.lua): Relaxed validation in blacksmithing:smeltOre and blacksmithing:refundMaterials to require only a valid oreItem and session existence, logging actualBars mismatches without rejecting requests, fixing "Invalid smelting session" errors.
+Enhanced Forge Spawns (config.lua): Added four new predefined forge locations to Config.ForgeSpawns for better map coverage.
+Improved Tool Durability System (server.lua, config.lua): Replaced hardcoded durability loss (5) with configurable durabilityLoss (set to 2 for tool_hammer_blacksmith). Added partial crafting support when tool durability limits crafts, notifying players via blacksmithing:notifyPartialCraft.
+Added Configurable Commands (server.lua, config.lua): Introduced Config.Commands table for customizable pickupforge and removeforge command names and permissions, replacing hardcoded commands.
+Added Scrap Metal Recipe (config.lua): Added scrap_metal recipe requiring 10 units to produce 1 ironbar, with a 12-second duration and no bonus item.
+Updated Notification System (client.lua, server.lua): Replaced vorp:TipRight with vorp:NotifyLeft for consistent styling, using menu_textures, menu_icon_tick (success), and cross (error) icons with 4000ms duration and color coding (COLOR_RED, COLOR_GREEN).
+Added Crafting Cancellation (client.lua, server.lua): Implemented feather-progressbar cancel callback with blacksmithing:refundMaterials to refund materials on ESC press, with isCrafting flag to prevent overlapping crafts.
+Enhanced Animation Handling (client.lua): Added state checks (e.g., IsPedOnFoot, IsPedRagdoll) for vorp_animations:craft, with 5-second looping and robust cleanup on completion, cancellation, or resource stop.
+Updated Forge Menu (forge_menu.lua): Increased max craft amount from 10 to 50 via Config.MaxSmeltAmount, added tool requirements display (e.g., tool_hammer_blacksmith) in the UI, and adjusted positioning (top = '60%', height = '550px').
+Recipe Adjustments (config.lua): Reduced requiredAmount for copper, goldnugget, and silverore from 2 to 1, set rewardAmount to 1 for all recipes, changed bonusRewardAmount from fixed (1) to 30% chance (0.3), reduced durations from 5000ms to 3000ms (except scrap_metal), and lowered xpReward from 2 to 1.
+Localization Enhancements (lang.lua): Added progress_bar_error, progress_bar_cancelled, smelting_partial_craft, network_error, and related title entries for all languages (en, es, fr, de). Updated smelting_progress to include "(ESC to cancel)".
+Improved Debug Logging (client.lua, server.lua): Added detailed [BLACKSMITH CLIENT DEBUG] and [BLACKSMITH SERVER DEBUG] logs for session creation, validation, material checks, and errors, controlled by Config.Debug.
+Forge Kit Registration Check (server.lua): Added placeholder check to prevent duplicate forge_kit registration, reducing vorp_inventory warnings on resource restart.
+Updated Dependencies (fxmanifest.lua, README.txt): Added vorp_animations dependency and updated README.txt to include it in setup instructions.
+Fixed Notification Styling (client.lua): Enhanced blacksmithing:notifyReward to use barItemLabel robustly for proper item names.
+Removed Duplicate Config Entry (config.lua): Eliminated duplicate Config.Tools definition.
+
+1.3.2 - 04/07/2025
+
+Disabled debug logging by default (Config.Debug = false) for production use.
+Simplified lang.lua to support only English (removed other languages).
+Removed unused Animations variable from forge_menu.lua.
+Optimized server.lua durability and XP logic for gum_crafting compatibility.
+Updated README.txt to include vorp_animations dependency.
+Fixed tool durability to prevent unintended partial crafts during testing.
+
+1.3.1 - 03/07/2025
+
+Added Config.Debug option to enable/disable debug logging, with additional debug prints for troubleshooting.
+Introduced Config.MaxSmeltAmount in config.lua to allow customization of maximum smelting amount.
+Adjusted crafting recipes: reduced requiredAmount, rewardAmount, and durations (from 5000ms to 3000ms) in config.lua.
+Removed duplicate Config.Tools entry in config.lua.
+Updated lang.lua to add "(ESC to cancel)" to smelting_progress for clarity.
