@@ -1,1 +1,0 @@
-INSERT INTO `items`(`item`, `label`, `limit`, `can_remove`, `type`, `usable`) VALUES ('ricx_graveshovel', 'Grave Shovel', 5, 1, 'item_standard', 1);
