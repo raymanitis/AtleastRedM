@@ -7,7 +7,7 @@ Config.SpamProtection = true       -- Enable spam protection
 Config.SpamCooldown = 1000        -- Cooldown between messages (ms)
 
 -- Channel settings
-Config.OOC = true               -- Enable OOC channel (true/false)
+Config.OOC = false               -- Enable OOC channel (true/false)
 Config.OOCLocal = true          -- Enable OOC Local channel (true/false)
 Config.ME = true                -- Enable ME channel (true/false) - always true by default
 Config.DO = true                -- Enable DO channel (true/false) - always true by default
