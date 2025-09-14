@@ -6,14 +6,14 @@
 var staff_team = [
 
 	{
-		"name": "Owner name",
+		"name": "Raymans",
 		"image": "https://forum.cfx.re/user_avatar/forum.cfx.re/neveradevelopment/144/4447132_2.png",
 		"rank": "Owner"
 	},
 	{
-		"name": "Admin name",
-		"image": "https://forum.cfx.re/user_avatar/forum.cfx.re/neveradevelopment/144/4447132_2.png",
-		"rank": "Admin"
+		"name": "Squdish",
+		"image": "https://forum.cfx.re/user_avatar/forum.cfx.re/squdishlv/144/4469765_2.png",
+		"rank": "Main Dev"
 	}
 
 ]
