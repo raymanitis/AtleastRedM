@@ -1,0 +1,31 @@
+{
+  "Background": {
+    "useVideo": true,
+    "video": {
+      "loop": true,
+      "muted": true,
+      "autoplay": true
+    }
+  },
+  "Music": {
+    "enabled": true,
+    "music": {
+      "autoplay": true,
+      "loop": true,
+      "volume": 0.5,
+      "showControls": true
+    }
+  },
+
+  "Loading": {
+    "progressSpeed": 80,
+    "completionDelay": 2000,
+    "maxTimeout": 15
+  },
+  "Animations": {
+    "enabled": true,
+    "fadeInDuration": 0.5,
+    "slideAnimationDuration": 1.2,
+    "tipsAnimationDelay": 2.0
+  }
+}
