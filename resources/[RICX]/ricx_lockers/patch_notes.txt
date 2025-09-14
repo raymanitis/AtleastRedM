@@ -1,0 +1,12 @@
+#1 2024. 06. 29
+Update: Added config Config.CanAnyoneCloseLocker to define anyone to close any locker if its opened
+Updated file: config.lua and server.lua
+
+#2 2024. 09. 24
+Update: Added config option to give back the locker item at removing a locker
+New config Config.GiveBackLockerItemAtRemove added
+Updated files: config.lua and client.lua
+
+#3 2025. 07. 02
+Update: Added Config.InteractDistance to define distance for interaction
+Updated files: client.lua, config.lua and fxmanifest.lua
