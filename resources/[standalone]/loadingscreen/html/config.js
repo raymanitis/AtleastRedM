@@ -30,7 +30,7 @@ const showPlayersList = false
 // green
 // pink
 // purple
-const theme = "orange"
+const theme = "red"
 
 // ==== WINTER UPDATE !! ==== \\
 const enableWinterUpdate = false
