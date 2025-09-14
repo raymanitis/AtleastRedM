@@ -1,5 +1,5 @@
 Config = {}
-Config.framework = "redemrp-reboot"--"redemrp" or "vorp" or "qbr" or "qbr2" or "redemrp-reboot" or "rsg"
+Config.framework = "vorp"--"redemrp" or "vorp" or "qbr" or "qbr2" or "redemrp-reboot" or "rsg"
 
 Config.ViewDistanceObject = 70.0
 Config.InteractDistance = 1.2
